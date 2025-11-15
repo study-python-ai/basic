@@ -20,4 +20,6 @@ country_output_model = llm.with_structured_output(Country)
 
 print(country_output_model)
 
-country_output_model.invoke("대한민국 대한 간단한 정보를 알려줘.")
+response = country_output_model.invoke("대한민국 대한 간단한 정보를 알려줘.")
+
+print(response)

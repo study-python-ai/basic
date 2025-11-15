@@ -11,7 +11,7 @@ from typing import List
 class Reflection(BaseModel):
     """반성/평가 결과 스키마
 
-    AI가 자신의 답변에 대해 자체 평가할 때 사용하는 구조화된 형식입니다.
+    AI가 자신의 답변에 대해 자체 비판할 때 사용하는 구조화된 형식입니다.
     누락된 부분과 불필요한 부분을 명확히 구분하여 평가합니다.
     """
 
@@ -27,15 +27,23 @@ class AnswerQuestion(BaseModel):
     """질문 답변 스키마
 
     AI가 질문에 대한 완전한 답변을 생성할 때 사용하는 구조화된 형식입니다.
-    답변, 추가 연구 쿼리, 자체 반성을 모두 포함합니다.
+    답변, 추가 검색 쿼리, 자체 비판 모두 포함합니다.
     """
 
     answer: str = Field(
         description="질문에 대한 ~250단어 분량의 답변 - 핵심 내용을 포괄적으로 다룸"
     )
     search_queries: List[str] = Field(
-        description="답변 개선을 위한 1-3개의 추가 검색 쿼리 - 더 나은 정보 수집을 위한 키워드"
+        description="답변 개선을 위한 1-3개의 추가 검색 쿼리 - 더 나은 정보 수집을 위한 검색 키워드"
     )
     reflection: Reflection = Field(
-        description="답변 품질에 대한 자체 반성 - 누락 및 불필요한 부분 분석"
+        description="답변 품질에 대한 자체 비판 - 누락 및 불필요한 부분 분석"
+    )
+
+
+class ReviseAnswer(AnswerQuestion):
+    """원래 질문에 대한 답변을 수정하는 스키마"""
+
+    references: List[str] = Field(
+        description="참고자료 - 수정된 답변을 뒷받침하는 인용문헌 목록"
     )
