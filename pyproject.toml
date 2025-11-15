@@ -13,6 +13,7 @@ dependencies = [
     "langgraph>=1.0.0",
     "python-dotenv>=1.2.1",
     "grandalf>=0.8",
+    "pillow>=12.0.0",
 ]
 authors = [
     { name="victor", email="xonme888@gmail.com" },

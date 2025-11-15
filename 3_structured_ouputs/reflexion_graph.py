@@ -1,5 +1,5 @@
 from typing import TypedDict, Annotated, Literal
-from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
+from langchain_core.messages import BaseMessage, AIMessage
 from langgraph.graph import StateGraph, add_messages
 from chains import first_chain, revisor_chain
 from execute_tools import execute_tools
@@ -52,6 +52,6 @@ graph.set_entry_point("draft")
 
 app = graph.compile()
 if __name__ == "__main__":
-    # 🎨 그래프 시각화 (PNG 이미지로 바로 보기)
-    print("🎨 Reflexion Agent 그래프 시각화")
+    # 그래프 시각화 (PNG 이미지로 바로 보기)
+    print("Reflexion Agent 그래프 시각화")
     show_graph(app, "reflexion_agent")
