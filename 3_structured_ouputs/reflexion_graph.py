@@ -1,48 +1,57 @@
-from typing import List
-
-
-from langchain_core.messages import BaseMessage, ToolMessage
-from langgraph.graph import END, MessageGraph
-
+from typing import TypedDict, Annotated, Literal
+from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
+from langgraph.graph import StateGraph, add_messages
 from chains import first_chain, revisor_chain
 from execute_tools import execute_tools
+from graph_utils import show_graph
 
 
-graph = MessageGraph()
+class GraphState(TypedDict):
+    """그래프 상태 정의"""
+
+    messages: Annotated[list[BaseMessage], add_messages]
 
 
-graph.add_node("draft", first_chain)
-graph.add_node("execute_tools", execute_tools)
-graph.add_node("revise", revisor_chain)
+def draft_node(state: GraphState) -> GraphState:
+    """초안 작성"""
+    result = first_chain.invoke({"messages": state["messages"]})
+    return {"messages": [AIMessage(content=result.answer)]}
 
 
-graph.add_edge("draft", "execute_tools")
-graph.add_edge("execute_tools", "revise")
+def execute_tools_node(state: GraphState) -> GraphState:
+    """도구 실행"""
+    tool_results = execute_tools(state["messages"])
+    return {"messages": tool_results}
 
 
-# 최대 반복 횟수 설정
-MAX_ITERATIONS = 1
+def revise_node(state: GraphState) -> GraphState:
+    """답변 수정"""
+    result = revisor_chain.invoke({"messages": state["messages"]})
+    return {"messages": [AIMessage(content=result.answer)]}
 
 
-def event_loop(state: List[BaseMessage]) -> str:
-    count_tool_visits = sum(isinstance(item, ToolMessage) for item in state)
-    print(f">>>>>>{count_tool_visits}")
-    num_iterations = count_tool_visits
-    if num_iterations > MAX_ITERATIONS:
-        return END
-
+def should_continue(state: GraphState) -> Literal["execute_tools", "__end__"]:
+    """계속할지 결정"""
+    messages = state["messages"]
+    # 메시지가 5개 이상이면 종료 (초안 + 검색 + 수정 완료)
+    if len(messages) >= 5:
+        return "__end__"
     return "execute_tools"
 
 
-graph.add_conditional_edges("revise", event_loop)
+# 그래프 구성
+graph = StateGraph(GraphState)
+graph.add_node("draft", draft_node)
+graph.add_node("execute_tools", execute_tools_node)
+graph.add_node("revise", revise_node)
+
+graph.add_edge("draft", "execute_tools")
+graph.add_edge("execute_tools", "revise")
+graph.add_conditional_edges("revise", should_continue)
 graph.set_entry_point("draft")
 
-
 app = graph.compile()
-print(app.get_graph().draw_mermaid())
-
-response = app.invoke(
-    "소상공인이 AI를 활용하여 사업을 성장시킬 수 있는 방법에 대한 블로그 포스트를 작성해주세요"
-)
-
-print(response[-1].tool_calls[0]["args"]["answer"])
+if __name__ == "__main__":
+    # 🎨 그래프 시각화 (PNG 이미지로 바로 보기)
+    print("🎨 Reflexion Agent 그래프 시각화")
+    show_graph(app, "reflexion_agent")
