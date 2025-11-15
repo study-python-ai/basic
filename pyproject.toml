@@ -9,8 +9,10 @@ dependencies = [
     "langchain-community>=0.4.1",
     "langchain-google-genai>=3.0.3",
     "langchain-anthropic>=0.2.0",
+    "langchain-openai>=0.2.0",
     "langgraph>=1.0.0",
     "python-dotenv>=1.2.1",
+    "grandalf>=0.8",
 ]
 authors = [
     { name="victor", email="xonme888@gmail.com" },

@@ -8,7 +8,6 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-import os
 
 # 환경변수 로드 (.env 파일에서 API 키 등을 가져옴)
 load_dotenv()
@@ -56,16 +55,19 @@ reflection_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
+
 # ==============================================
 # LLM 모델 설정
 # ==============================================
 # Google Generative AI (Gemini) 모델 초기화
 # API 키를 환경변수에서 직접 로드하여 인증 문제 방지
 
-llm = ChatOpenAI(
-    model="gpt-4.1-nano",  # 빠르고 효율적인 Gemini 모델
-    temperature=0.7,  # 창의성과 일관성의 균형
-)
+# llm = ChatOpenAI(
+#     model="gpt-4.1-nano",  # 빠르고 효율적인 Gemini 모델
+#     temperature=0.7,  # 창의성과 일관성의 균형
+# )
+
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 # ==============================================
 # 체인 구성
