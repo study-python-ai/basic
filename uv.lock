@@ -75,6 +75,18 @@ wheels = [
 ]
 
 [[package]]
+name = "aiosqlite"
+version = "0.21.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/13/7d/8bca2bf9a247c2c5dfeec1d7a5f40db6518f88d314b8bca9da29670d2671/aiosqlite-0.21.0.tar.gz", hash = "sha256:131bb8056daa3bc875608c631c678cda73922a2d4ba8aec373b19f18c17e7aa3", size = 13454, upload-time = "2025-02-03T07:30:16.235Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f5/10/6c25ed6de94c49f88a91fa5018cb4c0f3625f31d5be9f771ebe5cc7cd506/aiosqlite-0.21.0-py3-none-any.whl", hash = "sha256:2549cf4057f95f53dcba16f2b64e8e2791d7e1adedb13197dd8ed77bb226d7d0", size = 15792, upload-time = "2025-02-03T07:30:13.6Z" },
+]
+
+[[package]]
 name = "annotated-types"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -145,10 +157,12 @@ dependencies = [
     { name = "langchain-community" },
     { name = "langchain-core" },
     { name = "langchain-google-genai" },
+    { name = "langchain-groq" },
     { name = "langchain-openai" },
     { name = "langchain-tavily" },
     { name = "langchainhub" },
     { name = "langgraph" },
+    { name = "langgraph-checkpoint-sqlite" },
     { name = "langsmith" },
     { name = "pillow" },
     { name = "python-dotenv" },
@@ -163,10 +177,12 @@ requires-dist = [
     { name = "langchain-community", specifier = ">=0.4.1" },
     { name = "langchain-core", specifier = ">=1.0.5" },
     { name = "langchain-google-genai", specifier = ">=3.0.3" },
+    { name = "langchain-groq", specifier = ">=1.0.1" },
     { name = "langchain-openai", specifier = ">=0.2.0" },
     { name = "langchain-tavily", specifier = ">=0.2.13" },
     { name = "langchainhub", specifier = ">=0.1.21" },
     { name = "langgraph", specifier = ">=1.0.0" },
+    { name = "langgraph-checkpoint-sqlite", specifier = ">=3.0.0" },
     { name = "langsmith", specifier = ">=0.4.43" },
     { name = "pillow", specifier = ">=12.0.0" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
@@ -414,6 +430,23 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/23/6e/74407aed965a4ab6ddd93a7ded3180b730d281c77b765788419484cdfeef/greenlet-3.2.4-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:2917bdf657f5859fbf3386b12d68ede4cf1f04c90c3a6bc1f013dd68a22e2269", size = 1612508, upload-time = "2025-11-04T12:42:23.427Z" },
     { url = "https://files.pythonhosted.org/packages/0d/da/343cd760ab2f92bac1845ca07ee3faea9fe52bee65f7bcb19f16ad7de08b/greenlet-3.2.4-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:015d48959d4add5d6c9f6c5210ee3803a830dce46356e3bc326d6776bde54681", size = 1680760, upload-time = "2025-11-04T12:42:25.341Z" },
     { url = "https://files.pythonhosted.org/packages/e3/a5/6ddab2b4c112be95601c13428db1d8b6608a8b6039816f2ba09c346c08fc/greenlet-3.2.4-cp314-cp314-win_amd64.whl", hash = "sha256:e37ab26028f12dbb0ff65f29a8d3d44a765c61e729647bf2ddfbbed621726f01", size = 303425, upload-time = "2025-08-07T13:32:27.59Z" },
+]
+
+[[package]]
+name = "groq"
+version = "0.34.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "distro" },
+    { name = "httpx" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/21/8e/0dff61edeb5d79b56ca07c4e3a661a364744b052c73119526e05e0b6c85a/groq-0.34.1.tar.gz", hash = "sha256:72c8bd2938999cd46468ebb314c9702957bdf4003032410ea0d2cd9ddf8bdb1a", size = 143483, upload-time = "2025-11-14T16:42:37.712Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2b/64/592078e354946265430f4fbd337271338245531e14504a6c3623dcae59ad/groq-0.34.1-py3-none-any.whl", hash = "sha256:863e687c857d51aa8ed45c2c3c44d46e02f7f15fd5116722ac8315838c62bb25", size = 136038, upload-time = "2025-11-14T16:42:36.651Z" },
 ]
 
 [[package]]
@@ -708,6 +741,19 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-groq"
+version = "1.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "groq" },
+    { name = "langchain-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/88/02/0711848cd15bc2ffc4a08f00700e71e95fee665030894d767ebccbc9af31/langchain_groq-1.0.1.tar.gz", hash = "sha256:6e794761cc2428e027d3e94d2cd2718a366427eb8003d871944184161a275d91", size = 199574, upload-time = "2025-11-13T16:54:56.022Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a2/6e/f8d7cad7f7bdb6046bb992032e67c57b969e23930e4ebd1d8819c81efe9f/langchain_groq-1.0.1-py3-none-any.whl", hash = "sha256:088f408794ddf6d9959dbbef3d9de6a978fb6a9a7a2a85cf51fac4a147563bd2", size = 17709, upload-time = "2025-11-13T16:54:55.064Z" },
+]
+
+[[package]]
 name = "langchain-openai"
 version = "1.0.3"
 source = { registry = "https://pypi.org/simple" }
@@ -790,6 +836,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/0f/07/2b1c042fa87d40cf2db5ca27dc4e8dd86f9a0436a10aa4361a8982718ae7/langgraph_checkpoint-3.0.1.tar.gz", hash = "sha256:59222f875f85186a22c494aedc65c4e985a3df27e696e5016ba0b98a5ed2cee0", size = 137785, upload-time = "2025-11-04T21:55:47.774Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/48/e3/616e3a7ff737d98c1bbb5700dd62278914e2a9ded09a79a1fa93cf24ce12/langgraph_checkpoint-3.0.1-py3-none-any.whl", hash = "sha256:9b04a8d0edc0474ce4eaf30c5d731cee38f11ddff50a6177eead95b5c4e4220b", size = 46249, upload-time = "2025-11-04T21:55:46.472Z" },
+]
+
+[[package]]
+name = "langgraph-checkpoint-sqlite"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiosqlite" },
+    { name = "langgraph-checkpoint" },
+    { name = "sqlite-vec" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6e/d0/fd3e4a00cdde6aaeb3e4115e3d2e0e54a48b74cca873823a0fa6979a9b84/langgraph_checkpoint_sqlite-3.0.0.tar.gz", hash = "sha256:1b190ca6b4fd2bf70c0310896fd4240200ff54d3ee9b5ab7e7c05edfc824df72", size = 106005, upload-time = "2025-10-20T18:42:25.277Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5b/c2/6249a5fd0a204594995a4f29988a036d29d736cb87df2aebbbd08467475c/langgraph_checkpoint_sqlite-3.0.0-py3-none-any.whl", hash = "sha256:219c8ab974a69954fde7e3aa3cc2112f58b8fe5e1449293b32b344fa2dee110d", size = 32039, upload-time = "2025-10-20T18:42:23.998Z" },
 ]
 
 [[package]]
@@ -1402,6 +1462,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f0/f2/840d7b9496825333f532d2e3976b8eadbf52034178aac53630d09fe6e1ef/sqlalchemy-2.0.44.tar.gz", hash = "sha256:0ae7454e1ab1d780aee69fd2aae7d6b8670a581d8847f2d1e0f7ddfbf47e5a22", size = 9819830, upload-time = "2025-10-10T14:39:12.935Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9c/5e/6a29fa884d9fb7ddadf6b69490a9d45fded3b38541713010dad16b77d015/sqlalchemy-2.0.44-py3-none-any.whl", hash = "sha256:19de7ca1246fbef9f9d1bff8f1ab25641569df226364a0e40457dc5457c54b05", size = 1928718, upload-time = "2025-10-10T15:29:45.32Z" },
+]
+
+[[package]]
+name = "sqlite-vec"
+version = "0.1.6"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/88/ed/aabc328f29ee6814033d008ec43e44f2c595447d9cccd5f2aabe60df2933/sqlite_vec-0.1.6-py3-none-macosx_10_6_x86_64.whl", hash = "sha256:77491bcaa6d496f2acb5cc0d0ff0b8964434f141523c121e313f9a7d8088dee3", size = 164075, upload-time = "2024-11-20T16:40:29.847Z" },
+    { url = "https://files.pythonhosted.org/packages/a7/57/05604e509a129b22e303758bfa062c19afb020557d5e19b008c64016704e/sqlite_vec-0.1.6-py3-none-macosx_11_0_arm64.whl", hash = "sha256:fdca35f7ee3243668a055255d4dee4dea7eed5a06da8cad409f89facf4595361", size = 165242, upload-time = "2024-11-20T16:40:31.206Z" },
+    { url = "https://files.pythonhosted.org/packages/f2/48/dbb2cc4e5bad88c89c7bb296e2d0a8df58aab9edc75853728c361eefc24f/sqlite_vec-0.1.6-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7b0519d9cd96164cd2e08e8eed225197f9cd2f0be82cb04567692a0a4be02da3", size = 103704, upload-time = "2024-11-20T16:40:33.729Z" },
+    { url = "https://files.pythonhosted.org/packages/80/76/97f33b1a2446f6ae55e59b33869bed4eafaf59b7f4c662c8d9491b6a714a/sqlite_vec-0.1.6-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux1_x86_64.whl", hash = "sha256:823b0493add80d7fe82ab0fe25df7c0703f4752941aee1c7b2b02cec9656cb24", size = 151556, upload-time = "2024-11-20T16:40:35.387Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/98/e8bc58b178266eae2fcf4c9c7a8303a8d41164d781b32d71097924a6bebe/sqlite_vec-0.1.6-py3-none-win_amd64.whl", hash = "sha256:c65bcfd90fa2f41f9000052bcb8bb75d38240b2dae49225389eca6c3136d3f0c", size = 281540, upload-time = "2024-11-20T16:40:37.296Z" },
 ]
 
 [[package]]
