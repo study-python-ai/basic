@@ -1,7 +1,7 @@
 # ReAct Agent 구현 비교
 
 ## 개요
-이 프로젝트는 LangGraph를 사용한 ReAct(Reasoning and Acting) 에이전트의 두 가지 구현 방식을 보여줍니다.
+이 프로젝트는 LangGraph를 사용한 ReAct(Reasoning and Acting) 에이전트의 두 가지 구현
 
 ## 파일 구조
 
